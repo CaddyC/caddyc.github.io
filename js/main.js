@@ -10,7 +10,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
     });
 
     $(document).ready(function() {
-
         /* ---------------------------------------------- /*
          * WOW Animation When You Scroll
          /* ---------------------------------------------- */
@@ -20,8 +19,9 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         });
         wow.init();
 
+
         /* ---------------------------------------------- /*
-         * Scroll top
+         * Scroll to top
          /* ---------------------------------------------- */
 
         $(window).scroll(function() {
@@ -32,7 +32,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             }
         });
 
-        $('a#totop').click(function() {
+        $('#totop').click(function() {
             $('html, body').animate({ scrollTop: 0 }, 'slow');
             return false;
         });
@@ -190,7 +190,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         }
 
         /* ---------------------------------------------- /*
-         * Navbar hover dropdown on desctop
+         * Navbar hover dropdown on desktop
          /* ---------------------------------------------- */
 
         function hoverDropdown(width, mobileTest) {
@@ -232,6 +232,7 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             }
         });
 
+
         /* ---------------------------------------------- /*
          * Portfolio
          /* ---------------------------------------------- */
@@ -270,58 +271,6 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
         });
 
         /* ---------------------------------------------- /*
-         * Progress bar animations
-         /* ---------------------------------------------- */
-
-        $('.progress-bar').each(function(i) {
-            $(this).appear(function() {
-                var percent = $(this).attr('aria-valuenow');
-                $(this).animate({'width' : percent + '%'});
-                $(this).find('span').animate({'opacity' : 1}, 900);
-                $(this).find('span').countTo({from: 0, to: percent, speed: 900, refreshInterval: 30});
-            });
-        });
-
-        /* ---------------------------------------------- /*
-         * Owl Carousel
-         /* ---------------------------------------------- */
-
-        $('.owl-carousel').each(function(i) {
-
-            // Check items number
-            if ($(this).data('items') > 0) {
-                items = $(this).data('items');
-            } else {
-                items = 4;
-            }
-
-            // Check pagination true/false
-            if (($(this).data('pagination') > 0) && ($(this).data('pagination') === true)) {
-                pagination = true;
-            } else {
-                pagination = false;
-            }
-
-            // Check navigation true/false
-            if (($(this).data('navigation') > 0) && ($(this).data('navigation') === true)) {
-                navigation = true;
-            } else {
-                navigation = false;
-            }
-
-            // Build carousel
-            $(this).owlCarousel( {
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                nav: navigation,
-                dots: pagination,
-                loop: true,
-                dotsSpeed: 400,
-                items: items,
-                navSpeed: 300,
-                autoplay: 2000
-            });
-        });
-        /* ---------------------------------------------- /*
          * Scroll Animation
          /* ---------------------------------------------- */
 
@@ -333,42 +282,116 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
             e.preventDefault();
         });
 
-        /*===============================================================
-         Working Contact Form
-         ================================================================*/
+        /* ---------------------------------------------- /*
+         * Generate CV svg
+         /* ---------------------------------------------- */
 
-        $("#contactForm").submit(function (e) {
+        $.getJSON('js/career.json',function(data){
+            console.log('success');
 
-            e.preventDefault();
-            var $ = jQuery;
+            // Flatten the data structure
+            const flattenedData = data.flatMap(category =>
+                category.activities.map(activity => ({
+                    ...activity,
+                    type: category.type
+                }))
+            );
 
-            var postData = $(this).serializeArray(),
-                formURL = $(this).attr("action"),
-                $cfResponse = $('#contactFormResponse'),
-                $cfsubmit = $("#cfsubmit"),
-                cfsubmitText = $cfsubmit.text();
+            // Parse dates
+            const parseTime = d3.timeParse("%B %Y");
+            flattenedData.forEach(d => {
+                const dates = d.period.split(" - ");
+                d.startDate = parseTime(dates[0]);
+                d.endDate = dates[1] === "Present" ? new Date() : parseTime(dates[1]);
+            });
 
-            $cfsubmit.text("Sending...");
 
-            $.ajax(
-                {
-                    url: formURL,
-                    type: "POST",
-                    data: postData,
-                    success: function (data) {
-                        $cfResponse.html(data);
-                        $cfsubmit.text(cfsubmitText);
-                        $('#contactForm input[name=name]').val('');
-                        $('#contactForm input[name=email]').val('');
-                        $('#contactForm textarea[name=message]').val('');
-                    },
-                    error: function (data) {
-                        alert("Error occurd! Please try again");
-                    }
+            // Declare the chart dimensions and margins.
+            const margin = ({top: 20, right: 50, bottom: 50, left: 50});
+            const width = Math.max($(window).width(), window.innerWidth) - margin.left - margin.right;
+            const height = 450 - margin.top - margin.bottom;
+
+
+            // Create SVG
+            const svg = d3.select("#about")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Create scales
+            const x = d3.scaleTime()
+                .domain(d3.extent(flattenedData.flatMap(d => [d.startDate, d.endDate])))
+                .range([0, width]);
+
+            const y = d3.scaleBand()
+                .domain(flattenedData.map(d => d.institution))
+                .range([0, height])
+                .padding(0.1);
+
+            const color = d3.scaleOrdinal()
+                .domain(["work", "school"])
+                .range(["steelblue", "orange"]);
+
+            // Add X axis
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x));
+
+            // Add rectangles
+            svg.selectAll("rect")
+                .data(flattenedData)
+                .enter()
+                .append("rect")
+                .attr("x", d => x(d.startDate))
+                .attr("y", d => y(d.institution))
+                .attr("width", d => x(d.endDate) - x(d.startDate))
+                .attr("height", y.bandwidth())
+                .attr("fill", d => color(d.type));
+
+            // Add labels
+            svg.selectAll(".label")
+                .data(flattenedData)
+                .enter()
+                .append("text")
+                .attr("class", "label")
+                .attr("x", d => x(d.startDate) + 5)
+                .attr("y", d => y(d.institution) + y.bandwidth() / 2)
+                .attr("dy", ".35em")
+                .text(d => d.title)
+                .attr("fill", "black")
+                .attr("font-size", "14px");
+
+            // Add tooltips
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("position", "absolute")
+                .style("pointer-events", "none")
+                .style("top", 0)
+                .style("opacity", 0)
+                .style("background", "white")
+                .style("border-radius", "5px")
+                .style("padding", "10px")
+                .style("box-shadow", "0 0 10px rgba(0,0,0,.25)")
+                .style("line-height", "1.3")
+                .style("border", "solid")
+                .style("border-width", "1px");
+
+            svg.selectAll("rect")
+                .on("mouseover", function(event, d) {
+                    tooltip.transition()
+                        .duration(300)
+                        .style("opacity", .9);
+                    tooltip.html(`${d.title}<br/>${d.institution}<br/>${d.period}`)
+                        .style("left", (event.pageX) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
                 });
-            return false;
-        });
+     });
     });
 })(jQuery);
-
-
