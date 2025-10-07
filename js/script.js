@@ -75,8 +75,8 @@
                 .padding(0.1);
 
             const color = d3.scaleOrdinal()
-                .domain(["work", "school", "certification"])
-                .range(["mediumpurple", "darkseagreen", "navajowhite"]);
+                .domain(["work", "school", "certification", "projects"])
+                .range(["mediumpurple", "darkseagreen", "navajowhite", "palevioletred"]);
 
             // Add X axis
             svg.append("g")
@@ -125,8 +125,8 @@
                 .attr("x", d => x(d.startDate) + 30)
                 .attr("y", d => y(d.institution) + y.bandwidth() / 2)
                 .attr("dy", ".25em")
-                .attr("textLength", "16em")
-                .text(d => d.title);
+                //.attr("textLength", "16em")
+                .text(d => d.titleshort? d.titleshort: d.title);
 
             let tooltipTriggerList = [].slice.call($('[data-bs-toggle="tooltip"], svg g.label'));
 

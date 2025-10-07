@@ -1,6 +1,33 @@
 [
   {
+    "type": "project",
+    "titleshort": "Visualization",
+    "title": "HR Analytics",
+    "institution": "Freelance",
+    "logo": "analytics.png",
+    "site": "https://github.com/czemtsop/serious-sql/tree/main/People_Analytics",
+    "location": "Saskatoon, Canada",
+    "start": "May 2025",
+    "end": "June 2025",
+    "skills": ["Data Exploration", "Data visualisation", "Communication"],
+    "achievements": ["Identify patterns and predictors of employee turnover to improve retention strategies"]
+  },
+  {
+    "type": "project",
+    "titleshort": "SQL Project",
+    "title": "Marketing Analytics",
+    "institution": "Freelance.",
+    "logo": "analytics.png",
+    "site": "https://github.com/czemtsop/serious-sql/tree/main/Marketing_Analytics",
+    "location": "Saskatoon, Canada",
+    "start": "March 2025",
+    "end": "April 2025",
+    "skills": ["Data Exploration", "Critical thinking", "Communication"],
+    "achievements": ["Improved understanding of customer behaviour to optimize ROI on campaign"]
+  },
+  {
     "type": "certification",
+    "titleshort": "CAP-X",
     "title": "Certified Analytics Professional (CAP) Expert",
     "institution": "INFORMS",
     "logo": "informs.png",
@@ -10,18 +37,6 @@
     "end": "Present",
     "skills": ["Analytics", "Critical thinking", "Statistics"],
     "achievements": ["The CAP certification is a trusted, independent verification of the critical technical expertise and related soft skills possessed by accomplished analytics and data science professionals."]
-  },
-  {
-    "type": "work",
-    "title": "Customer service representative",
-    "institution": "Foundever",
-    "logo": "foundever.png",
-    "site": "https://jobs.foundever.com/content/Who-we-are/?locale=en_US&",
-    "location": "Saskatoon, Canada",
-    "start": "December 2024",
-    "end": "Present",
-    "skills": ["Troubleshooting", "Critical thinking", "Communication", "French"],
-    "achievements": ["Promoted customer retention through timely and effectively attending to their concerns"]
   },
   {
     "type": "work",
