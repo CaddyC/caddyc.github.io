@@ -70,13 +70,13 @@
                 .range([0, width]);
 
             const y = d3.scaleBand()
-                .domain(data.map(d => d.institution))
+                .domain(data.map(d => d.titleshort))
                 .range([0, height])
                 .padding(0.1);
 
             const color = d3.scaleOrdinal()
-                .domain(["work", "school", "certification", "projects"])
-                .range(["mediumpurple", "darkseagreen", "navajowhite", "palevioletred"]);
+                .domain(["work", "school", "certification", "project"])
+                .range(["mediumpurple", "palevioletred", "navajowhite", "darkseagreen"]);
 
             // Add X axis
             svg.append("g")
@@ -89,7 +89,7 @@
                 .enter()
                 .append("rect")
                 .attr("x", d => x(d.startDate))
-                .attr("y", d => y(d.institution))
+                .attr("y", d => y(d.titleshort))
                 .attr("width", d => x(d.endDate) - x(d.startDate))
                 .attr("height", y.bandwidth())
                 .attr("fill", d => color(d.type));
@@ -113,7 +113,7 @@
                 .append("image")
                 .attr("href", d => 'images/logo/' + d.logo)
                 .attr("x", d => x(d.startDate))
-                .attr("y", d => y(d.institution) + y.bandwidth() / 4)
+                .attr("y", d => y(d.titleshort) + y.bandwidth() / 4)
                 .attr("width", 25)
                 .attr("height", 30);
 
@@ -123,7 +123,7 @@
                 .append("tspan")
                 .attr("class", "title")
                 .attr("x", d => x(d.startDate) + 30)
-                .attr("y", d => y(d.institution) + y.bandwidth() / 2)
+                .attr("y", d => y(d.titleshort) + y.bandwidth() / 2)
                 .attr("dy", ".25em")
                 //.attr("textLength", "16em")
                 .text(d => d.titleshort? d.titleshort: d.title);

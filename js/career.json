@@ -1,22 +1,38 @@
 [
   {
     "type": "project",
-    "titleshort": "Visualization",
-    "title": "HR Analytics",
-    "institution": "Freelance",
+    "titleshort": "Job market Analytics",
+    "title": "Data Career Job Market Analysis Engine",
+    "institution": "Personal",
+    "logo": "analytics.png",
+    "site": "https://github.com/czemtsop/data-jobs",
+    "location": "Saskatoon, Canada",
+    "start": "June 2025",
+    "end": "August 2025",
+    "skills": ["Python", "data harvesting", "Data cleaning", "Data visualisation"],
+    "achievements": [
+      "Identify regional demand for data jobs, guiding job seekers in their relocation decisions",
+      "Benchmark salaries across industries and experience levels, to facilitate budgeting and strategic planning."
+    ]
+  },
+  {
+    "type": "project",
+    "titleshort": "HR",
+    "title": "People Analytics Case Study",
+    "institution": "Personal",
     "logo": "analytics.png",
     "site": "https://github.com/czemtsop/serious-sql/tree/main/People_Analytics",
     "location": "Saskatoon, Canada",
     "start": "May 2025",
     "end": "June 2025",
-    "skills": ["Data Exploration", "Data visualisation", "Communication"],
+    "skills": ["Data Exploration", "Data visualisation", "SQL", "Communication"],
     "achievements": ["Identify patterns and predictors of employee turnover to improve retention strategies"]
   },
   {
     "type": "project",
-    "titleshort": "SQL Project",
-    "title": "Marketing Analytics",
-    "institution": "Freelance.",
+    "titleshort": "Marketing",
+    "title": "Marketing Analytics Case Study",
+    "institution": "Personal",
     "logo": "analytics.png",
     "site": "https://github.com/czemtsop/serious-sql/tree/main/Marketing_Analytics",
     "location": "Saskatoon, Canada",
@@ -33,13 +49,14 @@
     "logo": "informs.png",
     "site": "https://www.informs.org/About-INFORMS",
     "location": "Catonsville, USA",
-    "start": "March 2025",
-    "end": "Present",
+    "start": "October 2024",
+    "end": "March 2025",
     "skills": ["Analytics", "Critical thinking", "Statistics"],
     "achievements": ["The CAP certification is a trusted, independent verification of the critical technical expertise and related soft skills possessed by accomplished analytics and data science professionals."]
   },
   {
     "type": "work",
+    "titleshort": "BI Engineer",
     "title": "Business Intelligence Engineer",
     "institution": "Kuelap Inc",
     "logo": "kuelap.png",
@@ -59,6 +76,7 @@
   },
   {
     "type": "work",
+    "titleshort": "Service Delivery Specialist",
     "title": "Service Delivery Specialist",
     "institution": "Kuelap Africa SASU",
     "logo": "kuelap.png",
@@ -74,6 +92,7 @@
   },
   {
     "type": "work",
+    "titleshort": "Software Analyst",
     "title": "Software Analyst",
     "institution": "NASLA Cameroon",
     "logo": "nasla.jpeg",
@@ -86,7 +105,8 @@
   },
   {
     "type": "school",
-    "title": "MSc Operations Research & Applied Statistics",
+    "titleshort": "MSc Operations Research & Applied Statistics",
+    "title": "MSc Operations Research, Applied Statistics and Financial Risk Analysis",
     "institution": "Cardiff University",
     "logo": "cardiff.jpg",
     "site": "https://www.cardiff.ac.uk/study/postgraduate/taught/courses/course/operational-research-and-applied-statistics-msc",
@@ -98,6 +118,7 @@
   },
   {
     "type": "work",
+    "titleshort": "Software Product Manager",
     "title": "Digital Product Management Analyst",
     "institution": "Indra Sistemas",
     "logo": "indra.jpg",
@@ -110,6 +131,7 @@
   },
   {
     "type": "work",
+    "titleshort": "Software Solutions Architect",
     "title": "Digital Solutions Architect",
     "institution": "Eneo Cameroon",
     "logo": "eneo.png",
@@ -122,7 +144,8 @@
   },
   {
     "type": "work",
-    "title": "Digital Banking Support Specialist",
+    "titleshort": "Digital Banking Support Specialist",
+    "title": "Electronic Banking Support Specialist",
     "institution": "Citibank Cameroon",
     "logo": "citi.jpg",
     "site": "https://www.citigroup.com/global/about-us/global-presence/cameroon",
@@ -134,7 +157,8 @@
   },
   {
     "type": "school",
-    "title": "BEng Software Engineering",
+    "titleshort": "BEng Software Engineering",
+    "title": "BEng Computer (Software) Engineering",
     "institution": "University of Buea",
     "logo": "ub.png",
     "site": "https://www.ubuea.cm",
